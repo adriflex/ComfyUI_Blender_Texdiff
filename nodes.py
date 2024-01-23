@@ -81,48 +81,12 @@ class ViewportDepth:
         return m.digest().hex()
 
 
-class Sampler_Setting:
-    @classmethod
-    def INPUT_TYPES(cls):
-        # input = float, string and int
-        return {
-            "required": {
-                "seed": ("INT", {"min": 0}),
-                "sampler_steps": ("INT", {"min": 0}),
-                "cgf_scale": ("FLOAT", {"min": 0.0}),
-                # "sampler_name": ("STRING", {"default": ""}),
-                # "scheduler": ("STRING", {"default": ""}),
-                "sampler_name": (comfy.samplers.KSampler.SAMPLERS,),
-                "scheduler": (comfy.samplers.KSampler.SCHEDULERS,),
-                "denoise": ("FLOAT", {"min": 0.0, "max": 1.0}),
-            }
-        }
-
-    RETURN_TYPES = (
-        "INT",
-        "INT",
-        "FLOAT",
-        comfy.samplers.KSampler.SAMPLERS,
-        comfy.samplers.KSampler.SCHEDULERS,
-        "FLOAT",
-    )
-    FUNCTION = "get_sampler_setting"
-    CATEGORY = "Blender TexDiff"
-
-    def get_sampler_setting(
-        self, sampler_steps, cgf_scale, sampler_name, scheduler, denoise
-    ):
-        return (sampler_steps, cgf_scale, sampler_name, scheduler, denoise)
-
-
 NODE_CLASS_MAPPINGS = {
     "ViewportColor": ViewportColor,
     "ViewportDepth": ViewportDepth,
-    "Sampler_Setting": Sampler_Setting,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "ViewportColor": "From blender viewport color",
     "ViewportDepth": "From blender Viewport depth",
-    "Sampler_Setting": "From blender sampler setting",
 }
